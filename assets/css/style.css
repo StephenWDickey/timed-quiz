@@ -24,3 +24,19 @@ section .quiz-content {
 section .start-btn {
     background-color: teal;
 }
+
+.questions {
+    display: inline-block;
+    justify-content: space-around;
+}
+
+.answer-choice {
+    background-color: teal;
+    color: black;
+    border: black solid 1px;
+    padding: 10px;
+}
+
+.answer-choice:hover {
+    background-color: yellow;
+}

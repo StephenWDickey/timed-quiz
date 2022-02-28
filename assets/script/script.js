@@ -3,34 +3,40 @@ quiz questions and possible answers */
 
 let questions = [
     {
-        question: "Which statement does NOT guarantee that number will be non-negative?",
-        a: "number = Math.max (1, highScore);",
+        question: "Which statement does NOT guarantee that the number will be non-negative?",
+        choice1: "number = Math.max (1, highScore);",
         // \n\ allows us to make strings with multiple lines
-        b: "if (number < 0) { \n\
+        choice2: "if (number < 0) { \n\
                 number = 1; \n\
             }",
-        c: "number = Math.random ();",
-        d: "number = Math.min(10, highScore);",
+        choice3: "number = Math.random ();",
+        choice4: "number = Math.min(10, highScore);",
+        correct: "number = Math.min(10, highScore);",
+        
     },
     {
         question: "Which of these is NOT considered false?",
-        a: "0",
-        b: "'0'",
-        c: "null",
-        d: "''",
+        choice1: "0",
+        choice2: "'0'",
+        correct: "'0'",
+        choice3: "null",
+        choice4: "''",
     },
     {
         question: "Which is NOT the proper way to iterate through this cars array to display each element?",
-        a: "for (var i=0; i<cars.Length; i++) { \n\
+        choice1: "for (var i=0; i<cars.Length; i++) { \n\
             console.log(cars[i]); \n\
             }",
-        b: "for (var i=0; i < cars.Length; i++) { \n\
+        choice2: "for (var i=0; i < cars.Length; i++) { \n\
             console.log(i, cars[i]); \n\
             }",
-        c: "for (var i=0; i>cars.Length; i++) { \n\
+        choice3: "for (var i=0; i>cars.Length; i++) { \n\
             console.log(cars[i]); \n\
             }",
-        d: "var i = cars.length - 1; \n\
+        correct: "for (var i=0; i>cars.Length; i++) { \n\
+            console.log(cars[i]); \n\
+            }",
+        choice4: "var i = cars.length - 1; \n\
             while (i >= 0) { \n\
                 console.log (cars[i]); \n\
                 i--; \n\
@@ -38,38 +44,41 @@ let questions = [
     },
     {
         question: "Will the following code ever display the 'Stop' message? \n\
-                for (var i=0; i<cars.Length; i++) { \n\
-                    if (cars [i]) { \n\
-                        console.log('Vroom'); \n\
-                    } \n\
-                    else { \n\
-                        console.log('Stop'); \n\
-                    } \n\
-                }",
-        a: "Yes, at least once.",
-        b: "No, never.",
-        c: "It depends.",
+                    \n\ for (var i=0; i<cars.Length; i++) { \n\
+                    \n\ if (cars [i]) { \n\
+                            console.log('Vroom'); \n\
+                        } \n\
+                        \n\ else { \n\
+                            console.log('Stop'); \n\
+                        } \n\
+                    \n\ }",
+        choice1: "Yes, at least once.",
+        choice2: "No, never.",
+        choice3: "It depends.",
+        correct: "It depends.",
     },
     {
         question: "Which statement correctly stores data in the Web Storage API?",
-        a: "localStorage.getItem('lunch', 'sandwich');",
-        b: "localStorage.setItem('lunch', 'sandwich');",
-        c: "getItem.localStorage('lunch', 'sandwich');",
-        d: "setItem.localStorage('lunch', 'sandwich');",
+        choice1: "localStorage.getItem('lunch', 'sandwich');",
+        choice2: "localStorage.setItem('lunch', 'sandwich');",
+        correct: "localStorage.setItem('lunch', 'sandwich');",
+        choice3: "getItem.localStorage('lunch', 'sandwich');",
+        choice4: "setItem.localStorage('lunch', 'sandwich');",
     },
     {
         question: "Which of the following is NOT a reason to validate a user's responses?",
-        a: "Offers the user an opportunity to enter a correct response.",
-        b: "Reduces bogus answers getting stored in the database.",
-        c: "Improves the user experience.",
-        d: "Increases overall quality of user data",
+        choice1: "Offers the user an opportunity to enter a correct response.",
+        choice2: "Reduces bogus answers getting stored in the database.",
+        choice3: "Improves the user experience.",
+        correct: "Improves the user experience.",
+        choice4: "Increases overall quality of user data",
     },
 ];
 
 ////////////////////////////////////////////////
 
 // I will define some variables we will use
-
+let currentQuestion = 0;
 // selects for our start button
 let startQuiz = document.querySelector(".start-btn");
 // selects for section containing quiz info
@@ -82,29 +91,35 @@ let answerB = document.querySelector("#b");
 let answerC = document.querySelector("#c");
 // selects for option D
 let answerD = document.querySelector("#d");
-// selects for all answers
-let answers = document.querySelector(".answer-btn");
+//
+let correctAnswer=document.querySelector("#e");
+
+let answers = document.querySelector(".answer-choice")
+
 // selects for info at beginning of quiz
 let startScreen = document.querySelector(".start-screen");
 // we will make the quiz 60 seconds long
 let time = 60;
-// stores high score
-let highScoreStorage = JSON.parse(localStorage.getItem("quiz")) || [];
 // start score at 0
 let score = 0;
 // question part of question
 let questionEl = document.querySelector("#question");
 
 ////////////////////////////////////////////////////
-let currentQuestion = 0;
 // this will be a function to make question appear
 function createQuestion() {
     q = questions[currentQuestion];
     questionEl.innerText = q.question;
-    answerA.textContent = "a. " + q.a;
-    answerB.textContent = "b. " + q.b;
-    answerC.textContent = "c. " + q.c;
-    answerD.textContent = "d. " + q.d;
+    answerA.textContent = q.choice1;
+    answerB.textContent = q.choice2;
+    answerC.textContent = q.choice3;
+    answerD.textContent = q.choice4;
+};
+
+// this question increases the index counter, then generates new question
+function nextQuestion() {
+    currentQuestion++;
+    createQuestion();
 };
 
 ////////////////////////////////////////////
@@ -113,11 +128,13 @@ function removeStartScreen() {
     startScreen.style.display = "none";
 };
 
-//////////////////////////////////////////////////////
 
+
+
+////////////////////////////////////////////////////
 // event listener for start button
 /* clicking start button will remove startScreen info
-start the timer, and generate quiz questions */
+start the timer, and generate quiz question */
 startQuiz.addEventListener("click", function() {
     // removes start screen info, we're calling the function
     removeStartScreen();
@@ -160,3 +177,55 @@ startQuiz.addEventListener("click", function() {
 
     createQuestion();
 });
+//////////////////////////////////////////////
+var incorrect = function() {
+    window.alert("Incorrect. 10 second time penalty applied.");
+    time = time - 10;
+};
+
+var rightAnswer = function() {
+    score = score + 10;
+    window.alert("Correct!");
+};
+//////////////////////////////////////////////////////
+answerA.addEventListener("click", function(event) {
+    event.preventDefault();
+    if (questions[currentQuestion].choice1 === questions[currentQuestion].correct) {
+        rightAnswer();
+        nextQuestion();
+    }
+    else {
+        incorrect();
+    }
+});
+answerB.addEventListener("click", function(event) {
+    event.preventDefault();
+    if (questions[currentQuestion].choice2 === questions[currentQuestion].correct) {
+        rightAnswer();
+        nextQuestion();
+    }
+    else {
+        incorrect();
+    }
+});
+answerC.addEventListener("click", function(event) {
+    event.preventDefault();
+    if (questions[currentQuestion].choice3 === questions[currentQuestion].correct) {
+        rightAnswer();
+        nextQuestion();
+    }
+    else {
+        incorrect();
+    }
+});
+answerD.addEventListener("click", function(event) {
+    event.preventDefault();
+    if (questions[currentQuestion].choice4 === questions[currentQuestion].correct) {
+        rightAnswer();
+        nextQuestion();
+    }
+    else {
+        incorrect();
+    }
+});
+
