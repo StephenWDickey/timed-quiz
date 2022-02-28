@@ -1,0 +1,26 @@
+/* styling for timed quiz! */
+
+header {
+    background-color: teal;
+    display: flex;
+    align-items: center;
+}
+
+header .high-scores {
+    color: black;
+    width: 50%;
+}
+
+header .timer {
+    float: right;
+    width: 50%;
+}
+
+section .quiz-content {
+    display: flex;
+    justify-content: space-around;
+}
+
+section .start-btn {
+    background-color: teal;
+}
