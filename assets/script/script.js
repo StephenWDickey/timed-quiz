@@ -73,7 +73,7 @@ let questions = [
 // selects for our start button
 let startQuiz = document.querySelector(".start-btn");
 // selects for section containing quiz info
-let quiz = document.querySelector(".quiz-content");
+let quiz = document.querySelector(".questions");
 // selects for option A
 let answerA = document.querySelector("#a");
 // selects for option B
@@ -88,19 +88,26 @@ let answers = document.querySelector(".answer-btn");
 let startScreen = document.querySelector(".start-screen");
 // we will make the quiz 60 seconds long
 let time = 60;
-// we should be able to target question data with his
-let questionEl = document.querySelector("#quiz-questions");
 // stores high score
 let highScoreStorage = JSON.parse(localStorage.getItem("quiz")) || [];
 // start score at 0
 let score = 0;
+// question part of question
+let questionEl = document.querySelector("#question");
+
 ////////////////////////////////////////////////////
-let questionsI = 0;
+let currentQuestion = 0;
 // this will be a function to make question appear
 function createQuestion() {
-    
+    q = questions[currentQuestion];
+    questionEl.innerText = q.question;
+    answerA.textContent = "a. " + q.a;
+    answerB.textContent = "b. " + q.b;
+    answerC.textContent = "c. " + q.c;
+    answerD.textContent = "d. " + q.d;
 };
 
+////////////////////////////////////////////
 function removeStartScreen() {
     // in-line styling to remove start screen data
     startScreen.style.display = "none";
@@ -150,4 +157,6 @@ startQuiz.addEventListener("click", function() {
         }
     // the interval is 1000 milliseconds, this means 1 second
     }, 1000);
+
+    createQuestion();
 });
