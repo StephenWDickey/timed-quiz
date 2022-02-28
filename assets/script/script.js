@@ -1,3 +1,5 @@
+
+
 /* Here I will make an array containing 
 quiz questions and possible answers */
 
@@ -92,15 +94,13 @@ let answerC = document.querySelector("#c");
 // selects for option D
 let answerD = document.querySelector("#d");
 //
-let correctAnswer=document.querySelector("#e");
-
-let answers = document.querySelector(".answer-choice")
+let answers = document.querySelector(".questions");
 
 // selects for info at beginning of quiz
 let startScreen = document.querySelector(".start-screen");
 // we will make the quiz 60 seconds long
 let time = 60;
-// start score at 0
+// starting score at 0
 let score = 0;
 // question part of question
 let questionEl = document.querySelector("#question");
@@ -116,7 +116,7 @@ function createQuestion() {
     answerD.textContent = q.choice4;
 };
 
-// this question increases the index counter, then generates new question
+// this function increases the index counter, then generates new question
 function nextQuestion() {
     currentQuestion++;
     createQuestion();
@@ -127,7 +127,14 @@ function removeStartScreen() {
     // in-line styling to remove start screen data
     startScreen.style.display = "none";
 };
+///////////////////////////////////////////////
 
+function endGame () {
+    clearInterval(interval);
+    score = time + score;
+    document.querySelector("#initials").setAttribute("style", "display:block");
+    document.querySelector(".quiz").setAttribute("style", "display: none");
+    document.querySelector("#highscore").textContent = "Your final score is " + score;
 
 
 
@@ -154,7 +161,7 @@ startQuiz.addEventListener("click", function() {
             // reloads browser 
             button.innerHTML = "Restart?";
             button.addEventListener("click", function() {
-                location.reload();
+                highScore();
             });
             // adds new button for restart to quiz
             quiz.appendChild(button);
@@ -168,14 +175,20 @@ startQuiz.addEventListener("click", function() {
             let button = document.createElement("button");
             button.innerHTML = "Restart?";
             button.addEventListener("click", function() {
-                location.reload();
+                highScore();
             });
             quiz.appendChild(button);
         }
+        if (questions[currentQuestion] > questions[currentQuestion].length) {
+            highScore();
+        }
     // the interval is 1000 milliseconds, this means 1 second
+    
     }, 1000);
 
+
     createQuestion();
+
 });
 //////////////////////////////////////////////
 var incorrect = function() {
@@ -188,6 +201,8 @@ var rightAnswer = function() {
     window.alert("Correct!");
 };
 //////////////////////////////////////////////////////
+
+// event listeners for each answer choice
 answerA.addEventListener("click", function(event) {
     event.preventDefault();
     if (questions[currentQuestion].choice1 === questions[currentQuestion].correct) {
@@ -229,3 +244,8 @@ answerD.addEventListener("click", function(event) {
     }
 });
 
+////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////
