@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Timed Quiz!</title>
 </head>
 <body>
     <header>
@@ -23,9 +24,17 @@
             <p>
                 You will have 60 seconds to complete the quiz once you begin. Wrong answers will result in a 10 second time reduction penalty. Good luck and have fun!
             </p>
-            <button class="btn" id="start-quiz">
+            <button type="button" class="start-btn" id="start-quiz">
                 Start Quiz!
             </button>
+        </div>
+        <!-- the following divs will house the question data and answer button data-->
+        <div id = "quiz-content"></div>
+        <div>
+            <button type="button" class="answer-btn" id="a"></button>
+            <button type="button" class="answer-btn" id="b"></button>
+            <button type="button" class="answer-btn" id="c"></button>
+            <button type="button" class="answer-btn" id="d"></button>
         </div>
     </section>
     <footer>
