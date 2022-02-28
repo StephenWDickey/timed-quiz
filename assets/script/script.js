@@ -103,3 +103,48 @@ function removeStartScreen() {
     document.getElementById(".start-screen").style.display = "none";
 }
 
+//////////////////////////////////////////////////////
+
+// event listener for start button
+startQuiz.addEventListener("click", function() {
+    answers.style.display = "block";
+});
+
+// removes start screen info, we're calling the function
+removeStartScreen();
+
+// create timer that counts down
+quizTimer = setInterval(function() {
+    // time will count down
+    time--;
+    // timer will start at time we defined earlier (60)
+    document.querySelector(".timer").innerHTML = time;
+    // when time runs out we will notify user, offer retry
+    if (time === 0) {
+        clearInterval(quizTimer);
+        quiz.innerHTML = "<h3>Your time has run out!</h3>";
+        // creates new button to allow restart
+        let button = document.createElement("button");
+        // reloads browser 
+        button.innerHTML = "Restart?";
+        button.addEventListener("click", function() {
+            location.reload();
+        });
+        // adds new button for restart to quiz
+        quiz.appendChild(button);
+    }
+    // now if time drops below 0 
+    if (time < 0) {
+        clearInterval(quizTimer);
+        time = "0";
+        document.querySelector(".timer").innerHTML = time;
+        quiz.innerHTML = "<h3>You Lose!</h3>";
+        let button = document.createElement("button");
+        button.innerHTML = "Restart?";
+        button.addEventListener("click", function() {
+            location.reload();
+        });
+        quiz.appendChild(button);
+    }
+// the interval is 1000 milliseconds, this means 1 second
+}, 1000);
