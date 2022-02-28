@@ -16,11 +16,9 @@
             Timer goes here
         </div>
     </header>
-    <section>
-        <div>
+    <section class="quiz-content" id="quiz-section">
+        <div class = "start-screen" id="start-data">
             <h1>Hello! Welcome to this timed quiz on some JavaScript fundamentals.</h1>
-        </div>
-        <div>
             <p>
                 You will have 60 seconds to complete the quiz once you begin. Wrong answers will result in a 10 second time reduction penalty. Good luck and have fun!
             </p>
@@ -28,8 +26,9 @@
                 Start Quiz!
             </button>
         </div>
+        
         <!-- the following divs will house the question data and answer button data-->
-        <div id = "quiz-content"></div>
+        <div id = "quiz-questions"></div>
         <div>
             <button type="button" class="answer-btn" id="a"></button>
             <button type="button" class="answer-btn" id="b"></button>

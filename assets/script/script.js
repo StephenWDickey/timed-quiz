@@ -66,3 +66,40 @@ let questions = [
     },
 ];
 
+////////////////////////////////////////////////
+
+// I will define some variables we will use
+
+// selects for our start button
+let startQuiz = document.querySelector(".start-btn");
+// selects for section containing quiz info
+let quiz = document.querySelector(".quiz-content");
+// selects for option A
+let answerA = document.querySelector("#a");
+// selects for option B
+let answerB = document.querySelector("#b");
+// selects for option C
+let answerC = document.querySelector("#c");
+// selects for option D
+let answerD = document.querySelector("#d");
+// selects for all answers
+let answers = document.querySelector(".answer-btn");
+// selects for info at beginning of quiz
+let startScreen = document.querySelector(".start-screen");
+// we will make the quiz 60 seconds long
+let time = 60;
+// we should be able to target question data with his
+let questionEl = document.querySelector("#quiz-questions");
+
+////////////////////////////////////////////////////
+
+// this will be a function to make question appear
+function createQuestion() {
+    questionEl.innerHTML = ""
+};
+
+function removeStartScreen() {
+    // in-line styling to remove start screen data
+    document.getElementById(".start-screen").style.display = "none";
+}
+
