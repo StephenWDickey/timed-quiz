@@ -7,8 +7,8 @@
 </head>
 <body>
     <header>
-        <div class = "high-scores">
-            <p>
+        <div>
+            <p class = "highscores" href="highscores.html">
                 View high scores
             </p>
         </div>
@@ -17,6 +17,14 @@
         </div>
     </header>
     <section class="start-screen-content" id="quiz-section">
+        <div class="high-scores" style="display:none">
+            <h1>Final Score</h1>
+            <h2 id="highscore"></h2>
+            <form id = "submit">
+                <input type="text" placeholder="Enter Initials"/>
+                <button type="submit" class="end-btn">Save score!</button>
+            </form>
+        </div>
         <div class = "start-screen" id="start-data">
             <h1>Hello! Welcome to this timed quiz on some JavaScript fundamentals.</h1>
             <p>

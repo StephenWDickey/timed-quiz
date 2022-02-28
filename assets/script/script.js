@@ -130,12 +130,11 @@ function removeStartScreen() {
 ///////////////////////////////////////////////
 
 function endGame () {
-    clearInterval(interval);
     score = time + score;
-    document.querySelector("#initials").setAttribute("style", "display:block");
-    document.querySelector(".quiz").setAttribute("style", "display: none");
+    document.querySelector(".high-scores").setAttribute("style", "display:block");
+    document.querySelector(".questions").setAttribute("style", "display: none");
     document.querySelector("#highscore").textContent = "Your final score is " + score;
-
+};
 
 
 ////////////////////////////////////////////////////
@@ -161,7 +160,7 @@ startQuiz.addEventListener("click", function() {
             // reloads browser 
             button.innerHTML = "Restart?";
             button.addEventListener("click", function() {
-                highScore();
+                endGame();
             });
             // adds new button for restart to quiz
             quiz.appendChild(button);
@@ -175,13 +174,11 @@ startQuiz.addEventListener("click", function() {
             let button = document.createElement("button");
             button.innerHTML = "Restart?";
             button.addEventListener("click", function() {
-                highScore();
+                endGame();
             });
             quiz.appendChild(button);
         }
-        if (questions[currentQuestion] > questions[currentQuestion].length) {
-            highScore();
-        }
+        
     // the interval is 1000 milliseconds, this means 1 second
     
     }, 1000);
