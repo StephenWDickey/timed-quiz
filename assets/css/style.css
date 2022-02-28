@@ -16,6 +16,7 @@ header .high-scores {
 header .timer {
     float: right;
     width: 50%;
+    padding: 20px;
 }
 
 section .quiz-content {
